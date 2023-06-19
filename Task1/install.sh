@@ -25,7 +25,7 @@ for line in "${lines[@]}"; do
 done
 
 echo "Les lignes ont été ajoutées au fichier /etc/apt/sources.list avec succès."
-echo"----------------------------------------------------------------------------"
+echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### étape 2 : installer les outils kube ###
@@ -49,7 +49,7 @@ sudo apt-get update && apt-get install -y kubelet=$version kubeadm=$version kube
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Les outils Kubeadm, Kubelet et Kubectl ont été installés avec succès." 
-echo"----------------------------------------------------------------------------"
+echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### étape 3: Modifier docker pour utiliser systemd 
@@ -73,7 +73,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo "Docker a été modifié avec succés afin d'utiliser systemd comme Cgroup." 
-echo"----------------------------------------------------------------------------"
+echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### etape 4: créer le cluster
@@ -90,7 +90,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 echo "Cluster Kubernetes crée avec succés." 
-echo"----------------------------------------------------------------------------"
+echo "----------------------------------------------------------------------------\n"
 #-------------------------------------------------
 ### étape 5: appliquer le plugin réseaux
 
@@ -102,7 +102,7 @@ read -p "Do you want to deploy two nginx pods? (yes/no): " choice
 
 if [[ $choice == "yes" ]]; then
     kubectl apply -f $file
-    echo "Execute : 'kubectl get pods' command to see if the deployment succedded  "
+    echo "Execute : 'kubectl get pods' command to see if the deployment succedded"
 else
     echo "No deployment executed."
 fi
