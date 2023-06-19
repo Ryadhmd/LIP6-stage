@@ -44,7 +44,8 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ### étape 3: Modifier docker pour utiliser systemd 
 # Chemin du fichier à modifier
 output=$(systemctl status docker)
-file=$(echo "$output" | grep -oP 'Loaded:.*docker')
+file=$(echo "$output" | grep -oP 'Loaded: loaded \K\S+' | tr -d '();')
+
 # Ligne à rechercher
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 
