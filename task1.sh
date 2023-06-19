@@ -43,8 +43,8 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 ### étape 3: Modifier docker pour utiliser systemd 
 # Chemin du fichier à modifier
-file="/etc/systemd/system/docker.service"
-
+output=$(systemctl status docker)
+file=$(echo "$output" | grep -oP 'Loaded:.*docker')
 # Ligne à rechercher
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 
@@ -67,6 +67,9 @@ systemctl restart docker
 sed -i '/swap/ s/^/#/' /etc/fstab
 swapoff -a 
 kubeadm init --pod-network-cidr=10.244.0.0/16
+mkdir -p $HOME/.kube 
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config 
+sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 
 ### étape 5: 
