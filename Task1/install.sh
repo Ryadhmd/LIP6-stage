@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-# Lignes à ajouter
+# Lignes à ajouter 
 lines=(
 "deb http://archive.debian.org/debian stretch main"
 "deb http://archive.debian.org/debian stretch/updates main"
@@ -16,6 +16,7 @@ lines=(
 )
 
 # Ajouter les lignes au fichier sources.list
+## on parcourt lines et on verifie si la ligne est présente dans le fichier si ce n'est pas le cas on l'ajoute
 for line in "${lines[@]}"; do
     grep -qxF "$line" /etc/apt/sources.list || echo "$line" >> /etc/apt/sources.list
 done
@@ -28,15 +29,15 @@ echo "Les lignes ont été ajoutées au fichier /etc/apt/sources.list avec succ�
 
 ### étape 2 : installer les outils kube ###
 
+### On crée ce dossier car sur cette version de Debian il n'est pas créer par défaut 
 mkdir /etc/apt/keyrings
-chmod 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl
-
+# Télécharge Google Cloud public signing key 
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-
+# Ajoute Kubernetes apt repository
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
+# Installe kubelet, kubeadm and kubectl avec la version demandée 
 sudo apt-get update
 sudo apt-get install -y kubelet=1.23.17-00 kubeadm=1.23.17-00 kubectl=1.23.17-00
 sudo apt-mark hold kubelet kubeadm kubectl
@@ -73,8 +74,19 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 
-### étape 5: 
+### étape 5: appliquer le plugin réseaux
 kubectl taint nodes --all node-role.kubernetes.io/master-
 kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+#!/bin/bash
+
+read -p "Do you want to deploy two nginx pods? (yes/no): " choice
+
+if [[ $choice == "yes" ]]; then
+    kubectl apply -f application/deployment.yaml
+    echo "Execute : 'kubectl get pods' command to see if the deployment succedded  "
+else
+    echo "No deployment executed."
+fi
 
 
