@@ -12,7 +12,7 @@ lines=(
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 replace="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd"
 # Chemin vers le fichier de déploiement de Nginx 
-file=deployement.yaml 
+file=application/deployement.yaml 
 
 #-------------------------------------------------
 ### étape 1: ajouter les repos ###
@@ -45,7 +45,8 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://a
 
 # Installe kubelet, kubeadm and kubectl avec la version demandée 
 
-sudo apt-get update && apt-get install -y kubelet=$version kubeadm=$version kubectl=$version
+sudo apt-get update 
+sudo apt-get install -y kubelet=$version kubeadm=$version kubectl=$version
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Les outils Kubeadm, Kubelet et Kubectl ont été installés avec succès." 
