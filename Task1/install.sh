@@ -25,6 +25,7 @@ for line in "${lines[@]}"; do
 done
 
 echo "Les lignes ont été ajoutées au fichier /etc/apt/sources.list avec succès."
+echo"----------------------------------------------------------------------------"
 
 #-------------------------------------------------
 ### étape 2 : installer les outils kube ###
@@ -48,6 +49,7 @@ sudo apt-get update && apt-get install -y kubelet=$version kubeadm=$version kube
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Les outils Kubeadm, Kubelet et Kubectl ont été installés avec succès." 
+echo"----------------------------------------------------------------------------"
 
 #-------------------------------------------------
 ### étape 3: Modifier docker pour utiliser systemd 
@@ -71,6 +73,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo "Docker a été modifié avec succés afin d'utiliser systemd comme Cgroup." 
+echo"----------------------------------------------------------------------------"
 
 #-------------------------------------------------
 ### etape 4: créer le cluster
@@ -87,6 +90,7 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 echo "Cluster Kubernetes crée avec succés." 
+echo"----------------------------------------------------------------------------"
 #-------------------------------------------------
 ### étape 5: appliquer le plugin réseaux
 
