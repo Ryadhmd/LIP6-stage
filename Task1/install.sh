@@ -11,8 +11,7 @@ lines=(
 # Lignes a changer dans le fichier service de Docker
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 replace="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd"
-# Chemin vers le fichier de déploiement de Nginx 
-file=application/deployment.yaml 
+
 
 #-------------------------------------------------
 ### étape 1: ajouter les repos ###
@@ -98,7 +97,8 @@ kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/
 read -p "Do you want to deploy two nginx pods? (yes/no): " choice
 
 if [[ $choice == "yes" ]]; then
-    kubectl apply -f $file
+    wget https://raw.githubusercontent.com/kubernetes/website/main/content/en/examples/application/deployment.yaml	
+    kubectl apply -f deployment.yaml
     echo "Execute : 'kubectl get pods' command to see if the deployment succedded"
 else
     echo "No deployment executed."
