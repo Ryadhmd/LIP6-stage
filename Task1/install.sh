@@ -12,7 +12,7 @@ lines=(
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 replace="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd"
 # Chemin vers le fichier de déploiement de Nginx 
-file=application/deployement.yaml 
+file=application/deployment.yaml 
 
 #-------------------------------------------------
 ### étape 1: ajouter les repos ###
@@ -25,7 +25,6 @@ for line in "${lines[@]}"; do
 done
 
 echo "Les lignes ont été ajoutées au fichier /etc/apt/sources.list avec succès."
-echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### étape 2 : installer les outils kube ###
@@ -50,7 +49,6 @@ sudo apt-get install -y kubelet=$version kubeadm=$version kubectl=$version
 sudo apt-mark hold kubelet kubeadm kubectl
 
 echo "Les outils Kubeadm, Kubelet et Kubectl ont été installés avec succès." 
-echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### étape 3: Modifier docker pour utiliser systemd 
@@ -74,7 +72,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo "Docker a été modifié avec succés afin d'utiliser systemd comme Cgroup." 
-echo "----------------------------------------------------------------------------\n"
 
 #-------------------------------------------------
 ### etape 4: créer le cluster
@@ -91,7 +88,6 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config 
 
 echo "Cluster Kubernetes crée avec succés." 
-echo "----------------------------------------------------------------------------\n"
 #-------------------------------------------------
 ### étape 5: appliquer le plugin réseaux
 
