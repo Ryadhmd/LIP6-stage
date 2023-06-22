@@ -1,7 +1,7 @@
 #!/bin/bash 
 
-unshare -p -u -n --fork --mount-proc sleep infinity 1 &
-wait
+unshare -p -u -n --fork --mount-proc sleep infinity 1 & 
+sleep 1
 master=$(pgrep -fn "sleep infinity 1") 
 nsenter -u -t $master hostname master
 
