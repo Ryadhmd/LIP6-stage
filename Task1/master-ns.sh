@@ -10,9 +10,9 @@ ip link set veth1 netns $master
 
 nsenter -n -u -p -m -t $master bash 
  
-Ip link set up veth1
-Ip addr add 192.168.1.2/24 dev veth1
-Ip route add default via 192.168.1.254 
+ip link set up veth1
+ip addr add 192.168.1.2/24 dev veth1
+ip route add default via 192.168.1.254 
 
 
  
