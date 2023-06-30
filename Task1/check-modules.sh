@@ -57,10 +57,15 @@ for package in ${packages[@]}; do
 done 
 
 user_entry=$(grep "^$(whoami):" /etc/subuid | cut -d ':' -f 3)
+group_entry=$(grep "^$(whoami):" /etc/subgid | cut -d ':' -f 3)
 subid=65536
-
+#TO DO improve this part 
 if [ $user_entry -lt $subid ]; then
    echo "/etc/subuid should contain more than 65536 sub-IDs"
+   exit 1
+fi
+if [ $group_entry -lt $subid ]; then
+   echo "/etc/subgid should contain more than 65536 sub-IDs"
    exit 1
 fi
 
@@ -94,5 +99,15 @@ for module in "${modules[@]}"; do
 	fi
   fi  
 done
+
+mkdir -p /etc/systemd/system/user@.service.d
+cat > /etc/systemd/system/user@.service.d/delegate.conf << EOF
+[Service]
+Delegate=yes
+EOF
+systemctl daemon-reload
+
+echo "The system is going to reboot now" 
+reboot 
 
 
