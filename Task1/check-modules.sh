@@ -8,10 +8,10 @@ if [[ -z "$1" ]]; then
 fi
 
 
-if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run as root."
-  exit 1
-fi
+#if [[ $EUID -ne 0 ]]; then
+#  echo "This script must be run as root."
+#  exit 1
+#fi
 
 # Get the current kernel version
 kernel_version=$(uname -r)
@@ -55,6 +55,16 @@ for package in ${packages[@]}; do
        fi   
     fi 
 done 
+
+user_entry=$(grep "^$(whoami):" /etc/subuid | cut -d ':' -f 3)
+subid=65536
+
+if [ $user_entry -lt $subid ]; then
+   echo "/etc/subuid should contain more than 65536 sub-IDs"
+   exit 1
+fi
+
+
 
 module_file="$1"
 # Check if the file exists
