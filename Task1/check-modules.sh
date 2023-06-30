@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Check if the file path argument is provided
