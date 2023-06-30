@@ -1,4 +1,5 @@
 #!/bin/bash
+##This is actually installed usernetes requirements 
 
 # Check if the file path argument is provided
 if [[ -z "$1" ]]; then
@@ -12,8 +13,50 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-module_file="$1"
+# Get the current kernel version
+kernel_version=$(uname -r)
 
+# Extract the major and minor version numbers
+major_version=$(echo "$kernel_version" | cut -d. -f1)
+minor_version=$(echo "$kernel_version" | cut -d. -f2)
+
+# Compare the version numbers
+if ! ([ "$major_version" -gt 4 ] || ([ "$major_version" -eq 4 ] && [ "$minor_version" -ge 18 ])); then
+  echo "Kernel version is less than 4.18."
+  exit 1 
+fi
+
+# Check if cgroup v2 are used 
+
+FILE=/sys/fs/cgroup/cgroup.controllers
+if [ ! -f $FILE ]; then
+  echo "The cgroup version used is v1"
+  exit 1
+fi 
+## TO DO : enable cgroup v2 
+
+# Check systemd version 
+systemd_version=$(systemctl --version | head -n 1 | awk '{print $2}')
+version_required=242
+if [ $systemd_version -lt $version_required ]; then
+   echo "Systemd version is less than $version"
+   exit 1
+fi 
+
+packages=(fuse3 iptables conntrack uidmap)
+for package in ${packages[@]}; do
+    if ! dpkg -s $package &> /dev/null; then
+       echo "The package $package is not installed" 
+       echo "Going to install $package..."
+       apt update 
+       if ! (apt install $package); then 
+       	  echo "Failed to install $package"
+          exit 1 
+       fi   
+    fi 
+done 
+
+module_file="$1"
 # Check if the file exists
 if [[ ! -f "$module_file" ]]; then
   echo "Module file does not exist."
@@ -33,7 +76,7 @@ for module in "${modules[@]}"; do
 	else
     		echo "Module $module is installed."
     	if modprobe $module; then
-       		echo "Module $module loaded successfully."
+       		echo "Module $module is now loaded successfully."
     	else
       	 	echo "Failed to load module $module."
     	fi   	 
