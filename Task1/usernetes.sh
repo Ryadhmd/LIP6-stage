@@ -1,5 +1,69 @@
 #!/bin/bash 
 
+### Requirements 
+
+# Check if the file path argument is provided
+if [[ -z "$1" ]]; then
+  echo "Usage: $0 <module_file>"
+  exit 1
+fi
+
+# Get the current kernel version
+kernel_version=$(uname -r)
+
+# Extract the major and minor version numbers
+major_version=$(echo "$kernel_version" | cut -d. -f1)
+minor_version=$(echo "$kernel_version" | cut -d. -f2)
+
+# Compare the version numbers
+if ! ([ "$major_version" -gt 4 ] || ([ "$major_version" -eq 4 ] && [ "$minor_version" -ge 18 ])); then
+  echo "Kernel version is less than 4.18."
+  exit 1
+fi
+
+# Check if cgroup v2 are used
+
+FILE=/sys/fs/cgroup/cgroup.controllers
+if [ ! -f $FILE ]; then
+  echo "The cgroup version used is v1"
+  exit 1
+fi
+## TO DO : enable cgroup v2
+
+# Check systemd version
+systemd_version=$(sudo systemctl --version | head -n 1 | awk '{print $2}')
+version_required=242
+if [ $systemd_version -lt $version_required ]; then
+   echo "Systemd version is less than $version"
+   exit 1
+fi
+
+packages=(fuse3 iptables conntrack uidmap)
+for package in ${packages[@]}; do
+	if ! dpkg -s $package &> /dev/null; then
+   	echo "The package $package is not installed"
+   	echo "Going to install $package..."
+   	apt update
+   	if ! (sudo apt install -y $package); then
+  		   echo "Failed to install $package"
+      	exit 1
+   	fi   
+	fi
+done
+
+user_entry=$(grep "^$(whoami):" /etc/subuid | cut -d ':' -f 3)
+group_entry=$(grep "^$(whoami):" /etc/subgid | cut -d ':' -f 3)
+subid=65536
+#TO DO improve this part
+if [ $user_entry -lt $subid ]; then
+   echo "/etc/subuid should contain more than 65536 sub-IDs"
+   exit 1
+fi
+if [ $group_entry -lt $subid ]; then
+   echo "/etc/subgid should contain more than 65536 sub-IDs"
+   exit 1
+fi
+
 module_file="$1"
 # Check if the file exists
 if [[ ! -f "$module_file" ]]; then
@@ -27,11 +91,18 @@ for module in "${modules[@]}"; do
     fi
 done
 
+sudo mkdir -p /etc/systemd/system/user@.service.d
+sudo tee /etc/systemd/system/user@.service.d/delegate.conf> /dev/null << EOF
+[Service]
+Delegate=yes
+EOF
+
+### Download and Install 
 usernetes_version=$(curl -s https://api.github.com/repos/rootless-containers/usernetes/releases/latest | grep -oP '"tag_name": "\K(.*)(?=")')
 
-wget https://www.github.com/rootless-containers/usernetes/releases/download/${usernetes_version}/usernetes-x86_64.tbz
+wget -nc https://www.github.com/rootless-containers/usernetes/releases/download/${usernetes_version}/usernetes-x86_64.tbz
 
-tar xjvf usernetes-x86_64.tbz
+tar xjf usernetes-x86_64.tbz
 cd usernetes
 
 chmod +x install.sh 
