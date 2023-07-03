@@ -43,7 +43,7 @@ for package in ${packages[@]}; do
 	if ! dpkg -s $package &> /dev/null; then
    	echo "The package $package is not installed"
    	echo "Going to install $package..."
-   	apt update
+   	sudo apt update
    	if ! (sudo apt install -y $package); then
   		   echo "Failed to install $package"
       	exit 1
