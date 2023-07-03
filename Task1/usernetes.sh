@@ -102,8 +102,7 @@ usernetes_version=$(curl -s https://api.github.com/repos/rootless-containers/use
 
 wget -nc https://www.github.com/rootless-containers/usernetes/releases/download/${usernetes_version}/usernetes-x86_64.tbz
 
-tar xjf usernetes-x86_64.tbz
-cd usernetes
+tar xjf usernetes-x86_64.tbz && cd usernetes
 
 chmod +x install.sh 
 ./install.sh 
