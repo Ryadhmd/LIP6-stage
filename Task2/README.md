@@ -51,9 +51,22 @@ Créez ensuite un dossier nommé `aws-creds` à l'aide de la commande `mkdir` :
 ```bash
 mkdir aws-creds
 ```
+## Configuration d'AWS
 
-## Configuration de AWS 
-Afin de pouvoir connecter les objects IoT à AWS IoT certaines taches de configurations sont necessaires, pour cela rendez-vous dans le service IoT core depuis votre Console de Management AWS
+Afin de pouvoir connecter les objets IoT à AWS IoT, certaines tâches de configuration sont nécessaires. Accédez à votre Console de Management AWS et recherchez le service "IoT Core" dans la barre de recherche ou trouvez-le dans la section "Internet of Things" (IoT).
 
+### Étape 1 : Créer une politique de sécurité
+Dans le menu de gauche, cliquez sur "Sécurité" puis sur "Stratégie", cliquez ensuite sur "Créer".
+
+<img src="images/create-policy.png" alt="Politique AWS" width="1000" height="800" />
+
+1. Donnez un nom à votre politique, par exemple "PolitiqueContiki" ou "Contiki".
+2. Dans la section "Action", sélectionnez les actions que vous souhaitez autoriser pour cette politique. Dans notre exemple nous avons séléctionner * afin d'autoriser toutes les actions AWS IoT ce qui est utile pour les tests. Cependant, il est préférable d'améliorer la sécurité pour une configuration en production. Pour des exemples de politiques plus sécurisées, consultez les [exemples de politiques AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/example-iot-policies.html)
+
+3. Dans la section "Ressource ARN", spécifiez les ressources auxquelles cette politique s'applique. Vous pouvez laisser l'option par défaut * pour appliquer la politique à toutes les ressources IoT.
+
+4. Enfin sous "Effet", choisissez "Autoriser" pour permettre les actions spécifiées par la politique.
+
+### Étape 2 : Créer un objet IoT 
 
 
