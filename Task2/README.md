@@ -51,22 +51,50 @@ Créez ensuite un dossier nommé `aws-creds` à l'aide de la commande `mkdir` :
 ```bash
 mkdir aws-creds
 ```
+<!-- <img src="images/create-policy.png" alt="Politique AWS" width="1000" height="800" /> 
+<img src="images/files.png" alt="Fichiers connexion AWS" width="400" height="600" />
+--> 
 ## Configuration d'AWS
 
 Afin de pouvoir connecter les objets IoT à AWS IoT, certaines tâches de configuration sont nécessaires. Accédez à votre Console de Management AWS et recherchez le service "IoT Core" dans la barre de recherche ou trouvez-le dans la section "Internet of Things" (IoT).
 
 ### Étape 1 : Créer une politique de sécurité
+
 Dans le menu de gauche, cliquez sur "Sécurité" puis sur "Stratégie", cliquez ensuite sur "Créer".
 
-<img src="images/create-policy.png" alt="Politique AWS" width="1000" height="800" />
+<p align="center">
+  <img src="images/create-policy.png" alt="Politique AWS" width="700" height="600" /> 
+</p>
 
 1. Donnez un nom à votre politique, par exemple "PolitiqueContiki" ou "Contiki".
-2. Dans la section "Action", sélectionnez les actions que vous souhaitez autoriser pour cette politique. Dans notre exemple nous avons séléctionner * afin d'autoriser toutes les actions AWS IoT ce qui est utile pour les tests. Cependant, il est préférable d'améliorer la sécurité pour une configuration en production. Pour des exemples de politiques plus sécurisées, consultez les [exemples de politiques AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/example-iot-policies.html)
 
-3. Dans la section "Ressource ARN", spécifiez les ressources auxquelles cette politique s'applique. Vous pouvez laisser l'option par défaut * pour appliquer la politique à toutes les ressources IoT.
+2. Dans la section "Action", sélectionnez les actions que vous souhaitez autoriser pour cette politique. Dans notre exemple, nous avons sélectionné `*` afin d'autoriser toutes les actions AWS IoT, ce qui est utile pour les tests. Cependant, il est préférable d'améliorer la sécurité pour une configuration en production. Pour des exemples de politiques plus sécurisées, consultez les [exemples de politiques AWS IoT](https://docs.aws.amazon.com/iot/latest/developerguide/example-iot-policies.html).
 
-4. Enfin sous "Effet", choisissez "Autoriser" pour permettre les actions spécifiées par la politique.
+3. Dans la section "Ressource ARN", spécifiez les ressources auxquelles cette politique s'applique. Vous pouvez laisser l'option par défaut `*` pour appliquer la politique à toutes les ressources IoT.
 
-### Étape 2 : Créer un objet IoT 
+4. Enfin, sous "Effet", choisissez "Autoriser" pour permettre les actions spécifiées par la politique.
 
+### Étape 2 : Créer un objet IoT
 
+Dans la console AWS IoT Core, dans le volet de navigation de gauche, choisissez "Gérer".
+
+1. Sur la page "Création d'objets AWS IoT" (Creating AWS IoT things), choisissez "Créer un seul objet".
+
+2. Sur la page "Spécifier les propriétés de l'objet", entrez un nom pour votre objet. Par exemple : Test-Thing. Des configurations supplémentaires sont possibles, mais nous allons nous restreindre au minimum.
+
+3. Une fois sur la page "Configurer le certificat de l'appareil", choisissez "Génération automatique d'un nouveau certificat". Cela va générer un certificat, une clé publique et une clé privée à l'aide de l'autorité de certification d'AWS IoT.
+
+4. Dans la rubrique "Attacher des stratégies aux certificats", sélectionnez la stratégie précédemment créée.
+
+5. Une fenêtre "Télécharger les certificats et les clés" devrait s'afficher. Téléchargez les différents fichiers sous le dossier `aws-creds` précédemment créé. Nous aurons plus particulièrement besoin du Certificat d'appareil, du Fichier de clé privée et du Certificat d'autorité de certification "Amazon Root CA 1".
+
+<p align="center">
+  <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
+</p>
+
+### Étape 3 : Copier l'URL du point de terminaison 
+Allez dans "Parametres" de AWS IoT sous "Point de terminaison des données du périphérique" copiez l'url de "Point de terminaison" c'est à ce point de terminaison que le code va se connecter afin d'acceder à AWS, il est notre porte d'entrée vers le Cloud. 
+
+<!-- <p align="center">
+  <img src="images/endpoint.jpeg" alt="Point de terminaison AWS" width="600" height="650" />
+</p>  --> 
