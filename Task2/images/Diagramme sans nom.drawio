@@ -1,9 +1,77 @@
-<mxfile host="app.diagrams.net" modified="2023-07-27T11:55:57.446Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" version="21.6.5" etag="AG5xpOS8_U-BExPjInl1" type="github">
+<mxfile host="app.diagrams.net" modified="2023-07-27T12:20:17.726Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0" etag="SHoQ9XrNC8m9v0OLtsLW" version="21.6.5" type="github">
   <diagram name="Page-1" id="39cofIjv55NeyahdnMm-">
-    <mxGraphModel>
+    <mxGraphModel dx="794" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-2" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.thermostat;fillColor=#5294CF;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="560" y="520" width="79.5" height="79.5" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-3" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.thermostat;fillColor=#5294CF;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="440" y="520" width="79.5" height="79.5" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-4" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.thermostat;fillColor=#5294CF;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="680" y="520" width="79.5" height="79.5" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-6" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.customer_gateway;" vertex="1" parent="1">
+          <mxGeometry x="561.5" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-11" value="RPL Border Router" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="561.5" y="320" width="78.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-12" value="Thing #1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="449.75" y="610" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-13" value="Thing #2" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="569.75" y="610" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-14" value="Thing #3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="689.75" y="610" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-20" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="zVtqDyX_6xhAj4APt4_j-3" target="zVtqDyX_6xhAj4APt4_j-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="490" as="sourcePoint" />
+            <mxPoint x="610" y="440" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="480" y="480" />
+              <mxPoint x="600" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-22" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="zVtqDyX_6xhAj4APt4_j-2" target="zVtqDyX_6xhAj4APt4_j-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-23" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.481;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="zVtqDyX_6xhAj4APt4_j-4" target="zVtqDyX_6xhAj4APt4_j-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="720" y="480" />
+              <mxPoint x="600" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-26" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Personal_Computer_with_Server.svg;" vertex="1" parent="1">
+          <mxGeometry x="240" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-28" value="SLIP Protocol" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="380" y="360" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-29" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1" source="zVtqDyX_6xhAj4APt4_j-26" target="zVtqDyX_6xhAj4APt4_j-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="470" as="sourcePoint" />
+            <mxPoint x="440" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-30" value="&lt;div&gt;Middleware&lt;/div&gt;&lt;div&gt;CoAP/MQTT &lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="320" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="zVtqDyX_6xhAj4APt4_j-31" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.endpoints;fillColor=#F58536;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
