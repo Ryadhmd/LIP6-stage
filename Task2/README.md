@@ -51,8 +51,23 @@ Créez ensuite un dossier nommé `aws-creds` à l'aide de la commande `mkdir` :
 ```bash
 mkdir aws-creds
 ```
-<!-- <img src="images/create-policy.png" alt="Politique AWS" width="1000" height="800" /> 
-<img src="images/files.png" alt="Fichiers connexion AWS" width="400" height="600" />
+<!-- 
+<p align="center">
+  <img src="images/create-policy.png" alt="Politique AWS" width="700" height="600" /> 
+</p>
+
+<p align="center">
+  <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
+</p>
+
+<p align="center">
+  <img src="images/MQTT-client.png" alt="Rubrique MQTT" width="600" height="400" />
+</p> 
+
+<p align="center">
+  <img src="images/endpoint.jpg" alt="Point de terminaison AWS" width="500" height="300" />
+</p> 
+
 --> 
 ## Configuration d'AWS
 
@@ -91,11 +106,44 @@ Dans la console AWS IoT Core, dans le volet de navigation de gauche, choisissez 
 <p align="center">
   <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
 </p>
+
 ### Étape 3 : Abonnement à une Rubrique MQTT 
-Rendez-vous "Client test MQTT" de AWS IoT et choisssez un nom de rubrique sur lequel vous voulez recevoir les messages MQTT. Dans notre exemple nous avons choisit test/testing mais vous pouvez le nommez comme vous voulez 
+
+Rendez-vous sur "Client test MQTT" d'AWS IoT et choisissez un nom de rubrique sur laquelle vous voulez recevoir les messages MQTT. Dans notre exemple, nous avons choisi "test/testing", mais vous pouvez la nommer comme vous le souhaitez.
+
+<p align="center">
+  <img src="images/MQTT-client.png" alt="Rubrique MQTT" width="600" height="400" />
+</p> 
+
 ### Étape 4 : Copier l'URL du point de terminaison 
-Allez dans "Parametres" de AWS IoT sous "Point de terminaison des données du périphérique" copiez l'url de "Point de terminaison" c'est à ce point de terminaison que le code va se connecter afin d'acceder à AWS, il est notre porte d'entrée vers le Cloud. 
+
+Allez dans "Paramètres" d'AWS IoT sous "Point de terminaison des données du périphérique", copiez l'URL du "Point de terminaison". Cette URL est la porte d'entrée vers le Cloud et c'est à ce point de terminaison que le code se connectera pour accéder à AWS.
 
 <p align="center">
   <img src="images/endpoint.jpg" alt="Point de terminaison AWS" width="500" height="300" />
 </p> 
+
+## Mise à jour du fichier de configuration
+
+Pour configurer correctement votre application, vous devez fournir différentes informations dans un fichier "config.ini". Un exemple de la structure de ce fichier est fourni sous le nom de "config-sample.ini". Suivez ces étapes pour mettre à jour le fichier de configuration :
+
+1. Renommez le fichier "config-sample.ini" en "config.ini" en utilisant la commande suivante dans le terminal :
+
+```bash
+mv config-sample.ini config.ini
+```
+
+2. Ouvrez le fichier "config.ini" à l'aide de l'éditeur de texte de votre choix. Par exemple, vous pouvez utiliser "gedit" en entrant la commande suivante dans le terminal :
+
+```bash
+gedit config.ini
+```
+
+3. Saisissez les informations de configuration requises dans le fichier "config.ini". Ces informations peuvent inclure des paramètres spécifiques à votre application ou projet.
+
+<p align="center">
+  <img src="images/config.png" alt="Fichier de configuration" width="500" height="300" />
+</p> 
+
+Assurez-vous de sauvegarder les modifications après avoir saisi les informations de configuration. Le fichier "config.ini" est essentiel pour assurer le bon fonctionnement de votre application avec les paramètres appropriés.
+
