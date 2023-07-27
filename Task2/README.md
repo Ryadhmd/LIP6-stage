@@ -91,10 +91,11 @@ Dans la console AWS IoT Core, dans le volet de navigation de gauche, choisissez 
 <p align="center">
   <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
 </p>
-
-### Étape 3 : Copier l'URL du point de terminaison 
+### Étape 3 : Abonnement à une Rubrique MQTT 
+Rendez-vous "Client test MQTT" de AWS IoT et choisssez un nom de rubrique sur lequel vous voulez recevoir les messages MQTT. Dans notre exemple nous avons choisit test/testing mais vous pouvez le nommez comme vous voulez 
+### Étape 4 : Copier l'URL du point de terminaison 
 Allez dans "Parametres" de AWS IoT sous "Point de terminaison des données du périphérique" copiez l'url de "Point de terminaison" c'est à ce point de terminaison que le code va se connecter afin d'acceder à AWS, il est notre porte d'entrée vers le Cloud. 
 
-<!-- <p align="center">
-  <img src="images/endpoint.jpeg" alt="Point de terminaison AWS" width="600" height="650" />
-</p>  --> 
+<p align="center">
+  <img src="images/endpoint.jpg" alt="Point de terminaison AWS" width="500" height="300" />
+</p> 
