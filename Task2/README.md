@@ -125,25 +125,68 @@ Allez dans "Paramètres" d'AWS IoT sous "Point de terminaison des données du p�
 
 ## Mise à jour du fichier de configuration
 
-Pour configurer correctement votre application, vous devez fournir différentes informations dans un fichier "config.ini". Un exemple de la structure de ce fichier est fourni sous le nom de "config-sample.ini". Suivez ces étapes pour mettre à jour le fichier de configuration :
+Pour configurer correctement votre application, vous devez fournir différentes informations dans un fichier `config.ini`. Un exemple de la structure de ce fichier est fourni sous le nom de `config-sample.ini`. Suivez ces étapes pour mettre à jour le fichier de configuration :
 
-1. Renommez le fichier "config-sample.ini" en "config.ini" en utilisant la commande suivante dans le terminal :
+1. Renommez le fichier `config-sample.ini` en `config.ini` en utilisant la commande suivante dans le terminal :
 
 ```bash
 mv config-sample.ini config.ini
 ```
 
-2. Ouvrez le fichier "config.ini" à l'aide de l'éditeur de texte de votre choix. Par exemple, vous pouvez utiliser "gedit" en entrant la commande suivante dans le terminal :
+2. Ouvrez le fichier `config.ini` à l'aide de l'éditeur de texte de votre choix. Par exemple, vous pouvez utiliser `gedit` en entrant la commande suivante dans le terminal :
 
 ```bash
 gedit config.ini
 ```
 
-3. Saisissez les informations de configuration requises dans le fichier "config.ini". Ces informations peuvent inclure des paramètres spécifiques à votre application ou projet.
+3. Saisissez les informations de configuration requises dans le fichier `config.ini`. Ces informations peuvent inclure des paramètres spécifiques à votre application ou projet.
 
 <p align="center">
-  <img src="images/config.png" alt="Fichier de configuration" width="500" height="300" />
+  <img src="images/config-ini.png" alt="Fichier de configuration" width="500" height="300" />
 </p> 
 
-Assurez-vous de sauvegarder les modifications après avoir saisi les informations de configuration. Le fichier "config.ini" est essentiel pour assurer le bon fonctionnement de votre application avec les paramètres appropriés.
+Dans la partie `SERVERSINFO` du fichier de configuration, assurez-vous que les adresses IP ainsi que la ressource demandée correspondent à la simulation que vous souhaitez lancer. Le fichier `config-sample.ini` est fourni avec des valeurs appropriées pour faire fonctionner la simulation "multiple-coap-servers", mais vous devez l'adapter en fonction de vos besoins spécifiques. 
+
+Assurez-vous de sauvegarder les modifications après avoir saisi les informations de configuration. Le fichier `config.ini` est essentiel pour assurer le bon fonctionnement de votre application avec les paramètres appropriés.
+
+## Lancer la simulation
+
+Une fois le fichier de configuration édité, il est temps de lancer la simulation. Suivez ces étapes :
+
+1. Rendez-vous dans le dossier `contiki/tools/cooja`.
+
+2. Assurez-vous que tous les sous-modules Git sont à jour en utilisant la commande suivante dans le terminal :
+
+```bash
+git submodule update --init
+```
+
+3. Lancez la simulation en utilisant la commande suivante :
+
+```bash
+ant run
+```
+
+4. Attendez que Cooja se lance.
+
+5. Sélectionnez "File" -> "Open simulation" -> "Browse" et recherchez le fichier "Task2/multiple-coap-servers.csc".
+
+<p align="center">
+  <img src="images/simulation.png" alt="Capture d'écran de Cooja" width="800" height="600" />
+</p> 
+
+Assurez-vous que la simulation se charge correctement avec le fichier "multiple-coap-servers.csc" sélectionné.
+
+6. Pour établir la connexion entre les deux réseaux, effectuez un clic droit sur la motte d'ID 1, puis allez dans `Mote tools for Sky1` et cliquez sur `Serial Socket(SERVER)`. Laissez le port par défaut et cliquez sur "Start".
+
+7. Lancez la simulation en cliquant sur "Start" dans la fenêtre "Simulation Control".
+
+8. Ouvrez maintenant un terminal et lancez :
+
+```bash
+sudo ~/contiki/tools/tunslip6 -a 127.0.0.1 -p 60001 aaaa::1/64
+```
+
+Tunslip est un outil utilisé pour faire le pont entre le trafic IP d'un hôte et un autre élément du réseau, généralement un routeur frontal (border router), via une liaison série. Tunslip crée une interface réseau virtuelle (tun) du côté de l'hôte et utilise SLIP (Serial Line Internet Protocol) pour encapsuler et faire passer le trafic IP vers et depuis l'autre extrémité de la liaison série. Cela permet d'établir la communication entre les différents éléments du réseau simulé.
+
 
