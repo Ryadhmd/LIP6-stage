@@ -45,30 +45,18 @@ Ensuite, déplacez-vous dans le répertoire `LIP6-stage/Task2` à l'aide de la c
 ```bash
 cd LIP6-stage/Task2
 ```
+Installez pip3 ainsi que les dépendances du projet :
+```bash
+sudo apt-get install python3-pip
+sudo pip3 install -r app/requirements.txt
+```
 
 Créez ensuite un dossier nommé `aws-creds` à l'aide de la commande `mkdir` :
 
 ```bash
 mkdir aws-creds
 ```
-<!-- 
-<p align="center">
-  <img src="images/create-policy.png" alt="Politique AWS" width="700" height="600" /> 
-</p>
 
-<p align="center">
-  <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
-</p>
-
-<p align="center">
-  <img src="images/MQTT-client.png" alt="Rubrique MQTT" width="600" height="400" />
-</p> 
-
-<p align="center">
-  <img src="images/endpoint.jpg" alt="Point de terminaison AWS" width="500" height="300" />
-</p> 
-
---> 
 ## Configuration d'AWS
 
 Afin de pouvoir connecter les objets IoT à AWS IoT, certaines tâches de configuration sont nécessaires. Accédez à votre Console de Management AWS et recherchez le service "IoT Core" dans la barre de recherche ou trouvez-le dans la section "Internet of Things" (IoT).
@@ -104,7 +92,7 @@ Dans la console AWS IoT Core, dans le volet de navigation de gauche, choisissez 
 5. Une fenêtre "Télécharger les certificats et les clés" devrait s'afficher. Téléchargez les différents fichiers sous le dossier `aws-creds` précédemment créé. Nous aurons plus particulièrement besoin du Certificat d'appareil, du Fichier de clé privée et du Certificat d'autorité de certification "Amazon Root CA 1".
 
 <p align="center">
-  <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="650" />
+  <img src="images/files.png" alt="Fichiers connexion AWS" width="600" height="800" />
 </p>
 
 ### Étape 3 : Abonnement à une Rubrique MQTT 
@@ -181,6 +169,10 @@ Assurez-vous que la simulation se charge correctement avec le fichier "multiple-
 
 7. Lancez la simulation en cliquant sur "Start" dans la fenêtre "Simulation Control".
 
+<p align="center">
+  <img src="images/simulation-started.png" alt="Capture d'écran de Cooja" width="800" height="600" />
+</p> 
+
 8. Ouvrez maintenant un terminal et lancez :
 
 ```bash
@@ -189,4 +181,23 @@ sudo ~/contiki/tools/tunslip6 -a 127.0.0.1 -p 60001 aaaa::1/64
 
 Tunslip est un outil utilisé pour faire le pont entre le trafic IP d'un hôte et un autre élément du réseau, généralement un routeur frontal (border router), via une liaison série. Tunslip crée une interface réseau virtuelle (tun) du côté de l'hôte et utilise SLIP (Serial Line Internet Protocol) pour encapsuler et faire passer le trafic IP vers et depuis l'autre extrémité de la liaison série. Cela permet d'établir la communication entre les différents éléments du réseau simulé.
 
+<p align="center">
+  <img src="images/tunslip.png" alt="Capture d'écran de Cooja" width="600" height="500" />
+</p> 
 
+## Lancer le Script
+
+Une fois toutes ces étapes effectuées, il ne vous reste plus qu'à lancer le script :
+
+```bash
+cd /app/
+python3 aws-connect-test.py
+```
+
+Après avoir exécuté le script, ouvrez la fenêtre "Client test MQTT" de AWS IoT pour vérifier les messages MQTT reçus.
+
+<p align="center">
+  <img src="images/results.png" alt="Capture d'écran des résultats AWS IoT" width="600" height="500" />
+</p>
+
+Vous devriez pouvoir observer les données envoyées et reçues par l'application.
