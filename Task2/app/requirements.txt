@@ -1,0 +1,2 @@
+aiocoap==03_rc1
+AWSIoTPythonSDK==1.5.2
