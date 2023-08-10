@@ -12,7 +12,7 @@ lines=(
 search="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock"
 replace="ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --exec-opt native.cgroupdriver=systemd"
 # path du fichier des pods nginx à deployer 
-file="Task1/application/deployment.yaml" 
+file="../application/deployment.yaml" 
 #-------------------------------------------------
 ### étape 1: ajouter les repos ###
 
