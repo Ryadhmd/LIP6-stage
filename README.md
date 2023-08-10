@@ -1,4 +1,4 @@
-# Projet LIP6-stage : Mise en œuvre du Cloud et de l'IoT
+# Stage LIP6 : Mise en œuvre du Cloud et de l'IoT
 
 Bienvenue dans le dépôt GitHub dédié à mon stage au sein du LIP6. Pendant cette période, j'ai eu l'opportunité de travailler sur le passionnant sujet de l'intégration du Cloud et de l'Internet of Things (IoT). Ce dépôt contient l'ensemble des scripts et des ressources que j'ai développés dans le cadre de ce stage.
 
