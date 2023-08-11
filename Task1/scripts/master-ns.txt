@@ -1,14 +1,16 @@
+### execute this on the Host
+# create the namespaces
 unshare -p -u -n --fork --mount-proc sleep infinity 1 & 
-sleep 1
 master=$(pgrep -fn "sleep infinity 1") 
 nsenter -u -t $master hostname master
 
-
+# creates Veth
 ip link add veth0 type veth peer name veth1
 ip link set up veth0 
 ip addr add 192.168.1.254/24 dev veth0
+ip link set veth1 netns $master
 
-ip link set veth1 netns $master 
+## enter into the namespace 
 nsenter -n -u -p -m -t $master bash 
 ip link set up lo
 ip link set up veth1
