@@ -8,7 +8,7 @@ Le stage s'est articulé autour de deux grandes missions, chacune ayant ses prop
 
 ### Tâche 1 : Intégration de Kubernetes dans un Groupement de Namespaces
 
-Dans cette première mission, j'ai exploré la faisabilité de l'intégration de Kubernetes au sein d'un groupement de namespaces. Ce dossier contient les scripts et les ressources que j'ai élaborés pour mettre en place cette intégration de manière efficace et fonctionnelle.
+Dans cette première mission, j'ai exploré la faisabilité de l'intégration de Kubernetes au sein d'un groupement de namespaces. Ce dossier contient les scripts et les ressources que j'ai élaborés pour tenter de mettre en place cette intégration.
 
 ### Tâche 2 : Gestion d'un Réseau IoT via COOJA/Contiki et AWS IoT
 
